@@ -1,8 +1,14 @@
 package jm.task.core.jdbc.dao;
 
 import jm.task.core.jdbc.model.User;
+import jm.task.core.jdbc.util.Util;
 
+import java.sql.Connection;
+import java.sql.Statement;
 import java.util.List;
+
+import static jm.task.core.jdbc.util.Util.getConnection;
+
 
 public class UserDaoJDBCImpl implements UserDao {
     public UserDaoJDBCImpl() {
@@ -15,6 +21,7 @@ public class UserDaoJDBCImpl implements UserDao {
 //    используя нашу созданную переменную Statement,
 //    запихиваем туда нашу переменную String (та, что с командами БД)
 
+//    Statement statement = getConnection().cre;
     public void createUsersTable() {
 
     }
