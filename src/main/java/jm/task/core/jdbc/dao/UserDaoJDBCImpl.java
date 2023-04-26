@@ -7,7 +7,7 @@ import java.sql.Connection;
 import java.sql.Statement;
 import java.util.List;
 
-import static jm.task.core.jdbc.util.Util.getConnection;
+
 
 
 public class UserDaoJDBCImpl implements UserDao {
@@ -21,7 +21,9 @@ public class UserDaoJDBCImpl implements UserDao {
 //    используя нашу созданную переменную Statement,
 //    запихиваем туда нашу переменную String (та, что с командами БД)
 
-//    Statement statement = getConnection().cre;
+//    Statement statement = getConnection();
+//    Statement statement = connection.createStatement()) {
+
     public void createUsersTable() {
 
     }
