@@ -10,7 +10,7 @@ public class Main {
     public static void main(String[] args) {
 
         Util.getConnection();
-        UserDao userDao = null;
+        UserDao userDao;
         try {
             userDao = new UserDaoJDBCImpl();
         } catch (SQLException e) {
