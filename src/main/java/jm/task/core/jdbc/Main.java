@@ -3,8 +3,8 @@ package jm.task.core.jdbc;
 import jm.task.core.jdbc.dao.UserDao;
 import jm.task.core.jdbc.dao.UserDaoJDBCImpl;
 import jm.task.core.jdbc.util.Util;
-import java.sql.SQLException;
 
+import java.sql.SQLException;
 
 public class Main {
     public static void main(String[] args) {
@@ -23,10 +23,6 @@ public class Main {
         userDao.saveUser("Name3", "LastName3", (byte) 31);
         userDao.saveUser("Name4", "LastName4", (byte) 38);
 
-//        userDao.getAllUsers();
-//        userDao.removeUserById(99);
-
-
         int i = 1;
         while (i < 100) {
             userDao.saveUser("Name" + i, "LastName" + i, (byte) (i));
@@ -36,8 +32,8 @@ public class Main {
         userDao.getAllUsers();
         userDao.removeUserById(100);
 
-//        userDao.cleanUsersTable();
-//        userDao.dropUsersTable();
+        userDao.cleanUsersTable();
+        userDao.dropUsersTable();
 
         try {
             Util.connection.close();
@@ -45,7 +41,6 @@ public class Main {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
 
     }
 
