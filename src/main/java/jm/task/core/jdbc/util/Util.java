@@ -14,7 +14,8 @@ public class Util {
     public static Connection getConnection() {
 
         Connection connection = null;
-       try {
+
+        try {
             Driver driver = new FabricMySQLDriver();
             DriverManager.registerDriver(driver);
         } catch (SQLException e) {
@@ -25,13 +26,6 @@ public class Util {
             System.out.println("Соединение установлено");
         } catch (SQLException e) {
             System.err.println("Не удалось соединение");
-        } finally {
-            try {
-                connection.close();
-                System.out.println("Соединение закрыто");
-            } catch (SQLException e) {
-                System.err.println("Соединение не закрыто");
-            }
         }
         return connection;
     }
