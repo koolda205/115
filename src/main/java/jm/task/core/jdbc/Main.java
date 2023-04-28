@@ -23,8 +23,8 @@ public class Main {
         userDao.saveUser("Name3", "LastName3", (byte) 31);
         userDao.saveUser("Name4", "LastName4", (byte) 38);
 
-//        userDao.getAllUsers();
-//        userDao.removeUserById(99);
+        userDao.getAllUsers();
+        userDao.removeUserById(99);
 
 
         int i = 1;
@@ -36,8 +36,8 @@ public class Main {
         userDao.getAllUsers();
         userDao.removeUserById(100);
 
-//        userDao.cleanUsersTable();
-//        userDao.dropUsersTable();
+        userDao.cleanUsersTable();
+        userDao.dropUsersTable();
 
         try {
             Util.connection.close();
