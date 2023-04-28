@@ -2,6 +2,7 @@ package jm.task.core.jdbc.dao;
 
 import jm.task.core.jdbc.model.User;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -16,6 +17,7 @@ public class UserDaoJDBCImpl implements UserDao {
     public UserDaoJDBCImpl() throws SQLException {
     }
     Statement statement = connection.createStatement();
+    PreparedStatement preparedStatement;
 
     public static long idNumber = 1;
 
@@ -40,24 +42,32 @@ public class UserDaoJDBCImpl implements UserDao {
 
     public void saveUser(String name, String lastName, byte age) {
 
-        User user = new User();
-        String sql = "INSERT INTO user values (" + idNumber + ", " + "'" + name + "', '" + lastName + "', " + age + ")";
+        String sql = "INSERT INTO user values (?, ?, ?, ?)";
         idNumber = idNumber + 1;
 
         try {
-            statement.executeUpdate(sql);
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setLong(1, idNumber);
+            preparedStatement.setString(2, name);
+            preparedStatement.setString(3, lastName);
+            preparedStatement.setByte(4, age);
+
+            preparedStatement.executeUpdate();
             System.out.println("Добавлен новый User");
         } catch (SQLException e) {
             System.err.println("Не добавлен новый User");
         }
     }
     public void removeUserById(long id) {
-        String sql = "DELETE FROM user WHERE id = " + "'" + id + "'";
-        System.out.println("User с id " + id + " удален");
+        String sql = "DELETE FROM user WHERE id = ?";
         try {
-            statement.executeUpdate(sql);
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setLong(1, idNumber);
+
+            preparedStatement.executeUpdate();
+            System.out.println("Удален User с id: " + id);
         } catch (SQLException e) {
-            System.err.println("Таблица не удалена");
+            System.err.println("Не удален User с id: \" + id");
         }
     }
 
