@@ -1,103 +1,96 @@
 package jm.task.core.jdbc.dao;
 
-import com.mysql.jdbc.Connection;
 import jm.task.core.jdbc.model.User;
-import jm.task.core.jdbc.util.Util;
 
-import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-//    UserDaoJDBCImpl - здесь расписываем основной функционал
-//    (CRUD методы взаимодействия с SQL)
-//    String переменная = "команда на языке БД"
-//    Statement переменная = наш метод из класса Util
-//    используя нашу созданную переменную Statement,
-//    запихиваем туда нашу переменную String (та, что с командами БД)
+import static jm.task.core.jdbc.util.Util.connection;
 
 public class UserDaoJDBCImpl implements UserDao {
     public UserDaoJDBCImpl() throws SQLException {
     }
-
-    public static int count = 1;
-    String create = "CREATE TABLE tab2 " +
-            "(" +
-            "id INT,\n" +
-            "name VARCHAR(255) NOT NULL,\n" +
-            "lastname VARCHAR(255) NOT NULL,\n" +
-            "age INT,\n)";
-    String drop = "DROP TABLE table";
-
-    String remove = "select id, name, author from books";
-
-    Connection connection = (Connection) Util.getConnection();
     Statement statement = connection.createStatement();
 
+    public static long idNumber = 1;
+
     public void createUsersTable() {
+        String sql = "CREATE TABLE user (id INT, name VARCHAR(255), lastname VARCHAR(255), age INT)";
         try {
-            statement.executeUpdate(create);
+            statement.executeUpdate(sql);
+            System.out.println("Таблица создана");
         } catch (SQLException e) {
             System.err.println("Не удалось создать таблицу");
         }
     }
-
     public void dropUsersTable() {
+        String sql = "DROP TABLE user";
         try {
-            statement.executeUpdate(drop);
+            statement.executeUpdate(sql);
+            System.out.println("Таблица удалена");
         } catch (SQLException e) {
-            System.err.println("Таблица удалена");
+            System.err.println("Таблица не удалена");
         }
     }
 
     public void saveUser(String name, String lastName, byte age) {
 
-        User user = new User(name, lastName, age);
-        String save = "INSERT INTO table (id, name, lastname, age) VALUES (?, ?, ?, ?)";
-        PreparedStatement preparedStatement = null;
+        User user = new User();
+        String sql = "INSERT INTO user values (" + idNumber + ", " + "'" + name + "', '" + lastName + "', " + age + ")";
+        idNumber = idNumber + 1;
 
         try {
-            preparedStatement = connection.prepareStatement(save);
-            preparedStatement.setLong(1, user.getId());
-            preparedStatement.setString(2, user.getName());
-            preparedStatement.setString(3, user.getLastName());
-            preparedStatement.setInt(4, user.getAge());
-
-            preparedStatement.executeUpdate();
+            statement.executeUpdate(sql);
+            System.out.println("Добавлен новый User");
         } catch (SQLException e) {
             System.err.println("Не добавлен новый User");
-        } finally {
-            if (preparedStatement != null) {
-                try {
-                    preparedStatement.close();
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
-                    if (connection != null) {
-                        try {
-                            connection.close();
-                        } catch (SQLException e) {
-                            throw new RuntimeException(e);
-                        }
-                    }
-            }
-
         }
     }
-
     public void removeUserById(long id) {
+        String sql = "DELETE FROM user WHERE id = " + "'" + id + "'";
+        System.out.println("User с id " + id + " удален");
         try {
-            statement.executeUpdate(remove);
+            statement.executeUpdate(sql);
         } catch (SQLException e) {
-            System.err.println("Таблица удалена");
+            System.err.println("Таблица не удалена");
         }
     }
 
     public List<User> getAllUsers() {
-        return null;
-    }
+        List <User> result = new ArrayList<>();
+        String sql = "SELECT * FROM user";
+        User user = new User();
 
+        try {
+            ResultSet resultSet = statement.executeQuery(sql);
+            while (resultSet.next()) {
+                user.setId(resultSet.getLong("id"));
+                user.setName(resultSet.getString("name"));
+                user.setLastName(resultSet.getString("lastname"));
+                user.setAge(resultSet.getByte("age"));
+
+                result.add(user);
+            }
+        } catch (SQLException e) {
+            System.err.println("Список не получился");
+        }
+        System.out.println(Arrays.toString(result.toArray()));
+        return result;
+    }
     public void cleanUsersTable() {
-
+        String sql = "DELETE FROM user";
+        try {
+            statement.executeUpdate(sql);
+            System.out.println("Таблица очищена");
+        } catch (SQLException e) {
+            System.err.println("Таблица не удалена");
+        }
     }
+
 }
+

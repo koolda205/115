@@ -5,15 +5,13 @@ import com.mysql.fabric.jdbc.FabricMySQLDriver;
 import java.sql.*;
 
 public class Util {
-    // реализуйте настройку соеденения с БД
-    private static final String URL = "jdbc:mysql://localhost:3306/mybase?useSSL=false";
+
+    private static final String URL = "jdbc:mysql://localhost:3306/first_db?useSSL=false";
     private static final String USERNAME = "rootroot";
     private static final String PASSWORD = "root";
-
+    public static Connection connection = null;
 
     public static Connection getConnection() {
-
-        Connection connection = null;
 
         try {
             Driver driver = new FabricMySQLDriver();
