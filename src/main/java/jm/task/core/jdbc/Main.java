@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
 
         Util.getConnection();
         UserDao userDao = null;
@@ -24,27 +24,10 @@ public class Main {
         userDao.saveUser("Name4", "LastName4", (byte) 38);
 
         userDao.getAllUsers();
-        userDao.removeUserById(99);
-
-
-        int i = 1;
-        while (i < 100) {
-            userDao.saveUser("Name" + i, "LastName" + i, (byte) (i));
-            i++;
-        }
-
-        userDao.getAllUsers();
-        userDao.removeUserById(100);
+        userDao.removeUserById(4);
 
         userDao.cleanUsersTable();
         userDao.dropUsersTable();
-
-        try {
-            Util.connection.close();
-            System.out.println("Соединение закрыто");
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
 
 
     }
