@@ -1,6 +1,7 @@
 package jm.task.core.jdbc.dao;
 
 import jm.task.core.jdbc.model.User;
+import jm.task.core.jdbc.util.Util;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,6 +17,8 @@ import static jm.task.core.jdbc.util.Util.getConnection;
 public class UserDaoJDBCImpl implements UserDao {
     public UserDaoJDBCImpl() throws SQLException {
     }
+//    Util.getConnection();
+//    UserDao userDao = new UserDaoJDBCImpl();
     Statement statement = getConnection().createStatement();
     PreparedStatement preparedStatement;
     public static long idNumber = 1;
