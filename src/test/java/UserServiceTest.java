@@ -16,7 +16,6 @@ public class UserServiceTest {
     public UserServiceTest() throws SQLException {
     }
 
-
     @Test
     public void dropUsersTable() {
         try {
