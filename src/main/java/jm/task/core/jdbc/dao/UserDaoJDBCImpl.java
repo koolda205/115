@@ -17,8 +17,6 @@ import static jm.task.core.jdbc.util.Util.getConnection;
 public class UserDaoJDBCImpl implements UserDao {
     public UserDaoJDBCImpl() throws SQLException {
     }
-//    Util.getConnection();
-//    UserDao userDao = new UserDaoJDBCImpl();
     Statement statement = getConnection().createStatement();
     PreparedStatement preparedStatement;
     public static long idNumber = 1;
