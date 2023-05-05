@@ -1,24 +1,29 @@
 package jm.task.core.jdbc.service;
 
 import jm.task.core.jdbc.dao.UserDao;
-import jm.task.core.jdbc.dao.UserDaoJDBCImpl;
+import jm.task.core.jdbc.dao.UserDaoHibernateImpl;
 import jm.task.core.jdbc.model.User;
+
+import javax.transaction.HeuristicMixedException;
+import javax.transaction.HeuristicRollbackException;
+import javax.transaction.RollbackException;
+import javax.transaction.SystemException;
 import java.sql.SQLException;
 import java.util.List;
 
 
 public class UserServiceImpl implements UserService {
 
-    UserDao userDao = new UserDaoJDBCImpl();
+    UserDao userDao = new UserDaoHibernateImpl();
 
     public UserServiceImpl() throws SQLException {
     }
 
-    public void createUsersTable() throws SQLException {
+    public void createUsersTable() throws SQLException, HeuristicRollbackException, SystemException, HeuristicMixedException, RollbackException {
         userDao.createUsersTable();
     }
 
-    public void dropUsersTable() throws SQLException {
+    public void dropUsersTable() throws SQLException, HeuristicRollbackException, SystemException, HeuristicMixedException, RollbackException {
         userDao.dropUsersTable();
     }
 
