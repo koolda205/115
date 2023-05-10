@@ -12,9 +12,10 @@ import java.sql.Connection;
 public class Util {
 
     private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
-    private static final String URL = "jdbc:mysql://localhost:3306/test?useSSL=false";
+    private static final String URL = "jdbc:mysql://localhost:3306/first_db?useSSL=false";
     private static final String USERNAME = "rootroot";
     private static final String PASSWORD = "root";
+    private static final String DIALECT = "org.hibernate.dialect.MySQL8Dialect";
     public static Connection connection;
     public static SessionFactory sessionFactory;
 
@@ -26,7 +27,7 @@ public class Util {
                     .setProperty("hibernate.connection.url", URL)
                     .setProperty("hibernate.connection.username", USERNAME)
                     .setProperty("hibernate.connection.password", PASSWORD)
-                    .setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL8Dialect")
+                    .setProperty("hibernate.dialect", DIALECT)
                     .addAnnotatedClass(User.class)
                     .setProperty("hibernate.c3p0.min_size","5")
                     .setProperty("hibernate.c3p0.max_size","200")
