@@ -9,8 +9,6 @@ import javax.transaction.RollbackException;
 import javax.transaction.SystemException;
 import java.sql.SQLException;
 
-import static jm.task.core.jdbc.util.Util.getSessionFactory;
-
 public class Main {
     public static void main(String[] args) throws SQLException, HeuristicRollbackException, SystemException, HeuristicMixedException, RollbackException {
 
@@ -30,7 +28,5 @@ public class Main {
         userService.dropUsersTable();
 
     }
-
-
 
 }
