@@ -18,7 +18,6 @@ public class Util {
     private static final String DIALECT = "org.hibernate.dialect.MySQL8Dialect";
     public static Connection connection;
     public static SessionFactory sessionFactory;
-
     public static SessionFactory getConnection() {
 
         try {
@@ -55,7 +54,7 @@ public class Util {
 //            connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 //            System.out.println("Соединение установлено");
 //        } catch (SQLException e) {
-//            System.err.println("Не удалось соединение");
+//            System.err.println("Не удалось установить соединение");
 //        }
 //        return connection;
 //    }
