@@ -1,3 +1,7 @@
-.idea/
+.idea/*
+*.class
+*.war
+*.jar
+*.ear
 *.iml
-*.jpb/
+*.jpb
